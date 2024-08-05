@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Enquiry Detail
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Enquiry Detail -->
+<h2>Enquiry Details</h2>
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Property Title</strong></td>
+      <td>{{ enquiry.property_id.property_title | title }}</td>
+    </tr>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td>{{ enquiry.user_id.username | title }}</td>
+    </tr>
+    <tr>
+      <td><strong>Email Address</strong></td>
+      <td>{{ enquiry.user_id.email }}</td>
+    </tr>
+    <tr>
+      <td><strong>Contact No</strong></td>
+      <td>{{ enquiry.user_id.contact_no }}</td>
+    </tr>
+    <tr>
+      <td><strong>Address</strong></td>
+      <td>{{ enquiry.user_id.address | title }}</td>
+    </tr>
+    <tr>
+      <td><strong>Message</strong></td>
+      <td>{{ enquiry.message | capfirst }}</td>
+    </tr>
+    <tr>
+      <td><strong>Enquiry Date</strong></td>
+      <td>{{ enquiry.enquiry_date }}</td>
+    </tr>
+    <tr>
+      <td><strong>See Property</strong></td>
+      <td><a href="{% url 'property' enquiry.property_id.id  %}"><button class="secondary-btn">View
+            Property</button></a></td>
+    </tr>
+    <tr>
+      <td class="horizontal-line"><strong>Status</strong></td>
+      <td class="horizontal-line">
+
+        {% if user.is_authenticated and user.is_owner %}
+        {% if enquiry.owner_remarks %}
+        Answered
+        {% else %}
+        Unanswered Enquiry
+        {% endif %}
+        {% else %}
+        {% if enquiry.owner_remarks %}
+        Updated
+        {% else %}
+        Not Update Yet
+        {% endif %}
+
+        {% endif %}
+
+      </td>
+    </tr>
+
+    {% if user.is_authenticated and user.is_owner %}
+    <form action="{% url 'enquiry_details' enquiry.id  %}" method="post">
+      {% csrf_token %}
+      <tr>
+        <td class="td-remarks"><strong>Remarks</strong></td>
+        <td class="td-remarks"><textarea name="owner_remarks" class="owner-remarks-input" rows="4"></textarea></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td-update-btn"><input type="submit" class="submit-btn" value="Send Remarks"
+            style="width: 100%;"></td>
+      </tr>
+    </form>
+
+    {% else %}
+    <tr>
+      <td colspan="2" class="owner-remarks-title">Owner Remarks</td>
+    </tr>
+    <tr>
+      <td><strong>Remarks</strong></td>
+      <td>
+        {% if enquiry.owner_remarks %}
+        {{ enquiry.owner_remarks | capfirst }}
+        {% else %}
+        Not Update Yet
+        {% endif %}
+      </td>
+    </tr>
+
+    <tr>
+      <td><strong>Remarks Date</strong></td>
+      <td>
+        {% if enquiry.remarks_date %}
+        {{ enquiry.remarks_date }}
+        {% else %}
+        Not Update Yet
+        {% endif %}
+      </td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+{% endblock content %}

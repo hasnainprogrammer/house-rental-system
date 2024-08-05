@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Property
+{% endblock title %}
+
+
+{% block content %}
+<h2 class="my-4">Add a Property</h2>
+<form action="{% url 'add_property' %}" method="POST" class="form-container" enctype="multipart/form-data">
+   {% csrf_token %}
+   <h4>Property Details</h4>
+   <div class="add-property-details">
+      <div class="label-input">
+         {{ form.property_title.label }}
+         {{ form.property_title }}
+      </div>
+      <div class="label-input">
+         {{ form.bathrooms.label }}
+         {{ form.bathrooms }}
+      </div>
+      <div class="label-input">
+         {{ form.bedrooms.label }}
+         {{ form.bedrooms }}
+      </div>
+      <div class="label-input">
+         {{ form.rooms.label }}
+         {{ form.rooms }}
+      </div>
+      <div class="label-input">
+         {{ form.price.label }}
+         {{ form.price }}
+      </div>
+      <div class="label-input">
+         {{ form.garage.label }}
+         {{ form.garage }}
+      </div>
+      <div class="label-input">
+         {{ form.address.label }}
+         {{ form.address }}
+      </div>
+      <div class="label-input">
+         {{ form.city.label }}
+         {{ form.city }}
+      </div>
+      <div class="label-input">
+         {{ form.state.label }}
+         {{ form.state }}
+      </div>
+      <div class="label-input">
+         {{ form.zipcode.label }}
+         {{ form.zipcode }}
+      </div>
+      <div class="label-input">
+         {{ form.sqft.label }}
+         {{ form.sqft }}
+      </div>
+   </div>
+   <h4>Property Images</h4>
+   <div class="add-property-images">
+      <div class="label-input">
+         {{ form.main_image.label }}
+         {{ form.main_image }}
+      </div>
+      <div class="label-input">
+         {{ form.image_1.label }}
+         {{ form.image_1 }}
+      </div>
+      <div class="label-input">
+         {{ form.image_2.label }}
+         {{ form.image_2 }}
+      </div>
+      <div class="label-input">
+         {{ form.image_3.label }}
+         {{ form.image_3 }}
+      </div>
+      <div class="label-input">
+         {{ form.image_4.label }}
+         {{ form.image_4 }}
+      </div>
+   </div>
+
+   <h4>Property Amenities</h4>
+   <div class="update-add-property-amenities">
+      <div class="label-checkbox-input">
+         {{ form.wifi.label }}
+         {{ form.wifi }}
+      </div>
+      <div class="label-checkbox-input">
+         {{ form.kitchen.label }}
+         {{ form.kitchen }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.parking.label }}
+         {{ form.parking }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.swimming_pool.label }}
+         {{ form.swimming_pool }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.air_conditioning.label }}
+         {{ form.air_conditioning }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.balcony.label }}
+         {{ form.balcony }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.tv.label }}
+         {{ form.tv }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.laundry.label }}
+         {{ form.laundry }}
+      </div>
+
+      <div class="label-checkbox-input">
+         {{ form.elevator_access.label }}
+         {{ form.elevator_access }}
+      </div>
+   </div>
+
+   <input type="submit" class="submit-btn" value="Add Property">
+</form>
+
+{% endblock content %}

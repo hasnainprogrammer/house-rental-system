@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Send Enquiries
+{% endblock title %}
+
+
+{% block content %}
+
+<h2>Your send enquiries</h2>
+
+{% if enquiries %}
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Property Name</th>
+            <th>Property Address</th>
+            <th>Property Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enquiry in enquiries %}
+        <tr>
+            <td>{{ enquiry.id }}</td>
+            <td>{{ enquiry.property_id.property_title | capfirst }}</td>
+            <td>{{ enquiry.property_id.address | capfirst }}</td>
+            <td>{{ enquiry.property_id.price }}</td>
+            <td>{% if enquiry.owner_remarks %} 
+                    Updated
+                {% else %} 
+                    Not Update Yet
+                {% endif %}</td>
+            <td><a href="{% url 'enquiry_details' enquiry.id %}"><button type="button" class="secondary-btn">View Detail</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p class="jumbotron">You have not made any enquiries.</p>
+{% endif %}
+
+
+{% endblock content %}

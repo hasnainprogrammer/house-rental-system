@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Manage Properties
+{% endblock title %}
+
+{% block content %}
+
+<!-- Manage Properties -->
+<h2>Manage your Properties</h2>
+<div class="properties">
+    {% for property in owner_properties %}
+
+    <div class="property">
+        <!-- price label -->
+        <div class="property-price-label">
+            <p><span class="data-point">{{ property.price }}</span>/month</p>
+        </div>
+
+        <img src="{{ property.main_image.url }}" alt="property-image">
+        <h6>{{ property.property_title | title}}</h6>
+        <div class="property-details">
+            <p><i class="ph ph-door-open icon"></i><span>{{ property.rooms }}</span> Rooms</p>
+            <p><i class="ph ph-bathtub icon"></i><span>{{ property.bathrooms }}</span> Bathrooms</p>
+            <p><i class="ph ph-bed icon"></i><span>{{ property.bedrooms }}</span> Bedrooms</p>
+            <p><i class="ph ph-chart-line icon"></i><span>{{ property.sqft }}</span> Sqft</p>
+        </div>
+        <div class="manage-property-buttons">
+            <a href="{% url 'property' property.id  %}"><button class="btn">View</button></a>
+            <a href="{% url 'update_property' property.id  %}"><button class="btn update-btn">Update</button></a>
+            <a data-propertyid="{{ property.id }}" class="delete-btns"><button
+                    class="btn delete-btn">Delete</button></a>
+            <!-- <a data-propertyid="{{ property.id }}" class="booked-btns"><button class="btn">Booked</button></a> -->
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if owner_properties.has_other_pages %}
+        
+<div class="pagination">
+    <div class="previous">
+        {% if owner_properties.has_previous %}
+            <a href="?page={{ owner_properties.previous_page_number }}">&laquo; Prev</a>
+        {% else %}
+            <a class="disabled-link">&laquo; Prev</a>
+        {% endif %}
+    </div>
+    <div class="current">
+       <a>Page <span class="data-point">{{ owner_properties.number }}</span> of <span class="data-point">{{ owner_properties.paginator.num_pages }}</span></a>
+    </div>
+    <div class="next">
+        {% if owner_properties.has_next %}
+            <a href="?page={{ owner_properties.next_page_number }}">Next &raquo;</a>
+        {% else %}
+            <a class="disabled-link">Next &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}

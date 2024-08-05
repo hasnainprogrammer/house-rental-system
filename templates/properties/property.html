@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Property
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Property -->
+<div class="single-property">
+    <div class="single-property-images">
+        <a href="{{ property.main_image.url }}" data-lightbox="property-image" class="main-image">
+            <img src="{{ property.main_image.url }}" alt="property-image">
+        </a>
+        <a href="{{ property.image_1.url }}" data-lightbox="property-image" class="image-1">
+            <img src="{{ property.image_1.url }}" alt="property-image">
+        </a>
+        <a href="{{ property.image_2.url }}" data-lightbox="property-image" class="image-2">
+            <img src="{{ property.image_2.url }}" alt="property-image">
+        </a>
+        <a href="{{ property.image_3.url }}" data-lightbox="property-image" class="image-3">
+            <img src="{{ property.image_3.url }}" alt="property-image">
+        </a>
+        <a href="{{ property.image_4.url }}" data-lightbox="property-image" class="image-4">
+            <img src="{{ property.image_4.url }}" alt="property-image">
+        </a>
+    </div>
+    <h1>{{ property.property_title | title }}</h1>
+    <div class="single-property-details-enquiry-amenities">
+
+        <!-- Property Details -->
+
+        <div class="single-property-details">
+            <h3 class="single-property-section-title property-details-title">Property Details</h3>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-money icon"></i>
+                    <p>Price:</p>
+                </div>
+                <p class="data-point">{{ property.price }}</p>
+            </div>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-door-open icon"></i>
+                    <p>Rooms:</p>
+                </div>
+                <p class="data-point">{{ property.rooms }}</p>
+            </div>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-bathtub icon"></i>
+                    <p>Bathrooms</p>
+                </div>
+                <p class="data-point">{{ property.bathrooms }}</p>
+            </div>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-bed icon"></i>
+                    <p>Bedrooms:</p>
+                </div>
+                <p class="data-point">{{ property.bedrooms }}</p>
+            </div>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-chart-line icon"></i>
+                    <p>Sqft:</p>
+                </div>
+                <p class="data-point">{{ property.sqft }}</p>
+            </div>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-garage icon"></i>
+                    <p>Garages:</p>
+                </div>
+                <p class="data-point">{{ property.garage }}</p>
+            </div>
+
+            <!-- Property Location -->
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-map-pin icon"></i>
+                    <p>Address:</p>
+                </div>
+                <p class="data-point">{{ property.address | title }}</p>
+            </div>
+
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-city icon"></i>
+                    <p>City:</p>
+                </div>
+                <p class="data-point">{{ property.city | title }}</p>
+            </div>
+
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-globe icon"></i>
+                    <p>State:</p>
+                </div>
+                <p class="data-point">{{ property.state | title }}</p>
+            </div>
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-mailbox icon"></i>
+                    <p>Zipcode:</p>
+                </div>
+                <p class="data-point">{{ property.zipcode }}</p>
+            </div>
+            
+            <div class="detail">
+                <div class="icon-text">
+                    <i class="ph ph-clock icon"></i>
+                    <p>Posted on:</p>
+                </div>
+                <p class="data-point">{{ property.list_date }}</p>
+            </div>
+        </div>
+
+        <!-- Make Enquiry Form -->
+
+        <div class="make-enquiry-form">
+            <h3 class="single-property-section-title">Contact Property Owner</h3>
+
+            {% if user.is_authenticated and user.id == property.owner_id.id %}
+            <p class="jumbotron">You are the owner of this property</p>
+
+            {% elif user.is_authenticated %}
+            <form action="{% url 'property' property.id %}" method="POST">
+                {% csrf_token %}
+                <div class="label-input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" value="{{ user.username }}" disabled>
+                </div>
+                <div class="label-input">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value="{{ user.email }}" disabled>
+                </div>
+                <div class="label-input">
+                    <label for="phone-no">Phone No</label>
+                    <input type="text" name="contact-no" id="phone-no" value="{{ user.contact_no }}" disabled>
+                </div>
+                <div class="label-input">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="4"></textarea>
+                </div>
+                <input type="submit" value="Make Enquiry" class="submit-btn">
+            </form>
+            {% else %}
+            <p class="jumbotron">You are not logged in</p>
+            {% endif %}
+        </div>
+
+
+        <!-- Property Amenities -->
+         
+        <div class="amenities">
+            <h3 class="single-property-section-title property-amenities-title">Property Amenities</h3>
+            <p><i
+                    class="{% if property.wifi %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Wifi
+            </p>
+            <p><i
+                    class="{% if property.kitchen %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Kitchen</p>
+            <p><i
+                    class="{% if property.parking %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Parking
+            </p>
+            <p><i
+                    class="{% if property.swimming_pool %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Swimming Pool</p>
+            <p><i
+                    class="{% if property.air_conditioning %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Air Conditioning</p>
+            <p><i
+                    class="{% if property.balcony %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Balcony</p>
+            <p><i
+                    class="{% if property.tv %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                TV
+            </p>
+            <p><i
+                    class="{% if property.laundry %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Laundry</p>
+            <p><i
+                    class="{% if property.elevator_access %} ph ph-check icon checkmark-icon {% else %} ph ph-x icon cross-icon {% endif %}"></i>
+                Elevator access</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Recieved Enquiries
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Recieved Enquiries -->
+<h2>Recieved Enquiries</h2>
+
+{% if enquiries %}
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email Address</th>
+      <th>Contact No</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for enquiry in enquiries %}
+    <tr>
+      <td>{{ enquiry.id }}</td>
+      <td>{{ enquiry.user_id.username }}</td>
+      <td>{{ enquiry.user_id.email }}</td>
+      <td>{{ enquiry.user_id.contact_no }}</td>
+      <td><a href="{% url 'enquiry_details' enquiry.id %}"><button class="secondary-btn">View
+            Detail</button></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+<p class="jumbotron">No enquiries recieved up untill now</p>
+
+{% endif %}
+
+
+{% endblock content %}

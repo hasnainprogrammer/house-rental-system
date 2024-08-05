@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+
+
+{% block title %}
+Properties
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Hero Section  -->
+<div class="hero-section">
+    <h3>Search Property Here</h3>
+    <form action="{% url 'search_property' %}" method="GET" class="search-property">
+        <div class="label-input">
+            <label for="address">Address</label>
+            <input type="text" name="address" id="address">
+        </div>
+        <div class="label-input">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city">
+        </div>
+        <div class="label-input">
+            <label for="state">State</label>
+            <input type="text" name="state" id="state">
+        </div>
+        <div class="label-input">
+            <label for="max-price">Maximum Price</label>
+            <input type="number" name="max-price" id="max-price">
+        </div>
+        <div class="label-input">
+            <label for="min-price">Minimum Price</label>
+            <input type="text" name="min-price" id="min-price">
+        </div>
+        <div class="label-input">
+            <label for="min-sqft">Minimum Square Feet</label>
+            <input type="text" name="min-sqft" id="min-sqft">
+        </div>
+        <div class="label-input">
+            <label for="max-rooms">Maximum Rooms</label>
+            <input type="text" name="max-rooms" id="max-rooms">
+        </div>
+        <div class="label-input">
+            <label for="min-rooms">Minimum Rooms</label>
+            <input type="text" name="min-rooms" id="min-rooms">
+        </div>
+        <div class="label-input">
+            <label for="min-bedrooms">Minimum Bedrooms</label>
+            <input type="text" name="min-bedrooms" id="min-bedrooms">
+        </div>
+        <button type="submit" class="search-property-btn"><i class="ph ph-magnifying-glass icon"></i> Search
+            Property</button>
+    </form>
+</div>
+
+<!-- Properties -->
+<h2>Properties</h2>
+<div class="properties">
+    {% for property in properties %}
+
+    <div class="property">
+        <!-- price label -->
+        <div class="property-price-label">
+            <p><span class="data-point">{{ property.price }}</span>/month</p>
+        </div>
+
+        <img src="{{ property.main_image.url }}" alt="property-image">
+        <h6>{{ property.property_title | title}}</h6>
+        <div class="property-details">
+            <p><i class="ph ph-door-open icon"></i><span>{{ property.rooms }}</span> Rooms</p>
+            <p><i class="ph ph-bathtub icon"></i><span>{{ property.bathrooms }}</span> Bathrooms</p>
+            <p><i class="ph ph-bed icon"></i><span>{{ property.bedrooms }}</span> Bedrooms</p>
+            <p><i class="ph ph-chart-line icon"></i><span>{{ property.sqft }}</span> Sqft</p>
+        </div>
+        <div class="location-details">
+            <p><i class="ph ph-map-pin icon"></i> {{ property.address | title }}</p>
+            <a href="{% url 'property' property.id  %}"><button class="btn">Details</button></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if properties.has_other_pages %}
+        
+<div class="pagination">
+    <div class="previous">
+        {% if properties.has_previous %}
+            <a href="?page={{ properties.previous_page_number }}">&laquo; Prev</a>
+        {% else %}
+            <a class="disabled-link">&laquo; Prev</a>
+        {% endif %}
+    </div>
+    <div class="current">
+       <a>Page <span class="data-point">{{ properties.number }}</span> of <span class="data-point">{{ properties.paginator.num_pages }}</span></a>
+    </div>
+    <div class="next">
+        {% if properties.has_next %}
+            <a href="?page={{ properties.next_page_number }}">Next &raquo;</a>
+        {% else %}
+            <a class="disabled-link">Next &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endif %}
+
+
+{% endblock content %}

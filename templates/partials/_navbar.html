@@ -1,0 +1,67 @@
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">
+        <i class="ph ph-house icon"></i>
+        <h4>KarayaKorona</h4>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{% url 'index' %}"><i class="ph ph-house icon"></i>Home</a></li>
+        <li><a href="{% url 'properties' %}"><i class="ph ph-house-line icon"></i>Properties</a></li>
+
+        {% if request.path == '/' %}
+        <li class="contact-us-link"><a href="#"><i class="ph ph-phone icon"></i>Contact Us</a></li>
+        {% endif %}
+
+
+        <!-- Admin -->
+        {% if user.is_authenticated and user.is_staff %}
+        <li class="dropdown-link-btn">
+            <a href="#" class="user-dropdown-link"><i class="ph ph-user-circle icon"></i>{{ user.username | title }} <i
+                    class="ph ph-caret-down caret-icon"></i></a>
+            <div class="dropdown">
+                <a href="{% url 'admin:index'  %}">Admin Dashboard</a>
+                <a href="{% url 'logout_user' %}">Logout</a>
+        </li>
+
+        <!-- Owner -->
+        {% elif user.is_authenticated and user.is_owner %}
+
+        <li class="dropdown-link-btn">
+            <a href="#" class="link"><i class="ph ph-user-rectangle icon"></i> {{ user.username | title }} <i
+                    class="ph ph-caret-down caret-icon"></i></a>
+            <div class="dropdown">
+                <a href="{% url 'add_property' %}">Add Property</a>
+                <a href="{% url 'manage_profile' %}">Manage Profile</a>
+                <a href="{% url 'recieved_enquiries' %}">Recieved Enquiries</a>
+                <a href="{% url 'manage_properties' %}">Manage Properties</a>
+                <a href="{% url 'logout_user' %}">Logout</a>
+            </div>
+        </li>
+
+        <!-- User -->
+        {% elif user.is_authenticated and user.is_user %}
+
+        <li class="dropdown-link-btn">
+            <a href="#" class="user-dropdown-link"><i class="ph ph-user icon"></i>{{ user.username | title }} <i
+                    class="ph ph-caret-down caret-icon"></i></a>
+            <div class="dropdown">
+                <a href="{% url 'manage_profile' %}">Manage Profile</a>
+                <a href="{% url 'send_enquiries' %}">Send Enquiries</a>
+                <a href="{% url 'logout_user' %}">Logout</a>
+        </li>
+
+        {% else %}
+
+        <li class="registeration-popup-btn"><a><i class="ph ph-user-plus icon"></i>Register</a></li>
+        <li><a href="{% url 'login_user' %}"><i class="ph ph-sign-in icon"></i>Login</a></li>
+
+        {% endif %}
+    </ul>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <i class="ph ph-list icon"></i>
+    </div>
+
+</div>

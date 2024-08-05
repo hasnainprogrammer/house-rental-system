@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Update Property
+{% endblock title %}
+
+
+{% block content %}
+
+<h2>Update your Property</h2>
+<form action="{% url 'update_property' updated_property.id %}" method="POST" enctype="multipart/form-data"
+    class="form-container">
+    {% csrf_token %}
+    <div class="label-input">
+        <label for="id_property_title">Property title:</label>
+        <input type="text" name="property_title" value="{{ updated_property.property_title }}" maxlength="200"
+            required="" id="id_property_title">
+    </div>
+
+    <div class="label-input">
+        <label for="id_bathrooms">Bathrooms:</label>
+        <input type="number" name="bathrooms" value="{{ updated_property.bathrooms }}" required="" id="id_bathrooms">
+    </div>
+
+    <div class="label-input">
+        <label for="id_bedrooms">Bedrooms:</label>
+        <input type="number" name="bedrooms" value="{{ updated_property.bedrooms }}" required="" id="id_bedrooms">
+    </div>
+    <div class="label-input">
+
+        <label for="id_rooms">Rooms:</label>
+        <input type="number" name="rooms" value="{{ updated_property.rooms }}" required="" id="id_rooms">
+    </div>
+    <div class="label-input">
+        <label for="id_price">Price:</label>
+        <input type="number" name="price" value="{{ updated_property.price }}" required="" id="id_price">
+    </div>
+
+    <div class="label-input">
+        <label for="id_garage">Garage:</label>
+        <input type="number" name="garage" value="{{ updated_property.garage }}" value="0" required="" id="id_garage">
+    </div>
+
+    <div class="label-input">
+        <label for="id_address">Address:</label>
+        <input type="text" name="address" value="{{ updated_property.address }}" maxlength="200" required=""
+            id="id_address">
+    </div>
+
+    <div class="label-input">
+        <label for="id_city">City:</label>
+        <input type="text" name="city" value="{{ updated_property.city }}" maxlength="100" required="" id="id_city">
+    </div>
+
+    <div class="label-input">
+        <label for="id_state">State:</label>
+        <input type="text" name="state" value="{{ updated_property.state }}" maxlength="100" required="" id="id_state">
+    </div>
+
+    <div class="label-input">
+        <label for="id_zipcode">Zipcode:</label>
+        <input type="text" name="zipcode" value="{{ updated_property.zipcode }}" maxlength="20" required=""
+            id="id_zipcode">
+    </div>
+
+    <div class="label-input">
+        <label for="id_sqft">Sqft:</label>
+        <input type="number" name="sqft" value="{{ updated_property.sqft }}" step="0.1" required="" id="id_sqft">
+    </div>
+
+    <div class="label-input">
+        <label for="id_main_image">Main image:</label>
+        <input type="file" name="main_image" required="" id="id_main_image">
+    </div>
+
+    <div class="label-input">
+        <label for="id_image_1">Image 1:</label>
+        <input type="file" name="image_1" required="" id="id_image_1">
+    </div>
+
+    <div class="label-input">
+        <label for="id_image_2">Image 2:</label>
+        <input type="file" name="image_2" required="" id="id_image_2">
+    </div>
+
+    <div class="label-input">
+        <label for="id_image_3">Image 3:</label>
+        <input type="file" name="image_3" required="" id="id_image_3">
+    </div>
+
+    <div class="label-input">
+        <label for="id_image_4">Image 4:</label>
+        <input type="file" name="image_4" required="" id="id_image_4">
+    </div>
+
+    <div class="update-add-property-amenities">
+        <div class="label-checkbox-input">
+            <label for="id_wifi">Wifi:</label>
+            <input type="checkbox" name="wifi" {% if updated_property.wifi %} checked {% endif %} id="id_wifi">
+        </div>
+        <div class="label-checkbox-input">
+            <label for="id_kitchen">Kitchen:</label>
+            <input type="checkbox" name="kitchen" {% if updated_property.kitchen %} checked {% endif %} id="id_kitchen">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_parking">Parking:</label>
+            <input type="checkbox" name="parking" {% if updated_property.parking %} checked {% endif %} id="id_parking">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_swimming_pool">Swimming pool:</label>
+            <input type="checkbox" name="swimming_pool" {% if updated_property.swimming_pool %} checked {% endif %}
+                id="id_swimming_pool">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_air_conditioning">Air conditioning:</label>
+            <input type="checkbox" name="air_conditioning" {% if updated_property.air_conditioning %} checked {% endif %} id="id_air_conditioning">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_balcony">Balcony:</label>
+            <input type="checkbox" name="balcony" {% if updated_property.balcony %} checked {% endif %} id="id_balcony">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_tv">Tv:</label>
+            <input type="checkbox" name="tv" {% if updated_property.tv %} checked {% endif %} id="id_tv">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_laundry">Laundry:</label>
+            <input type="checkbox" name="laundry" {% if updated_property.laundry %} checked {% endif %} id="id_laundry">
+        </div>
+
+        <div class="label-checkbox-input">
+            <label for="id_elevator_access">Elevator access:</label>
+            <input type="checkbox" name="elevator_access" {% if updated_property.elavator_access %} checked {% endif %}
+                id="id_elevator_access">
+        </div>
+
+    </div>
+
+    <input type="submit" class="submit-btn" value="Update Property">
+</form>
+
+
+{% endblock content %}

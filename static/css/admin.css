@@ -1,0 +1,76 @@
+/* Font Sizes */
+/* 
+16px, 20px, 25px, 31px, 39px, 48px, 61px, 71px, 82px, 94px
+*/
+
+/* Space Sizes */
+/* 
+2px, 4px, 8px, 12px, 16px, 22px, 32px, 38px, 48px, 54px, 64px, 70px, 80px, 86px, 96px, 102px, 112px
+*/
+/* ------------------------------------------------ */
+
+/* Variables */
+:root {
+  --main-color: #2563eb;
+  --gray-color: #343a40;
+  --font-family: "Poppins", sans-serif;
+  --left-right-margin: 96px;
+  --sections-margin: 96px;
+  --group-elements-margin: 48px;
+  --main-color-tint-100: #dbeafe;
+  --main-color-tint-50: #eff6ff;
+  --main-color-shade-700: #1d4ed8;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+#header,
+.module h2,
+.module caption,
+.inline-group h2,
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button,
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+  background-color: var(--main-color);
+}
+#header a:hover {
+  color: var(--main-color-tint-100);
+  border-bottom-color: var(--main-color-tint-100);
+}
+div.breadcrumbs {
+  background-color: var(--main-color-tint-100);
+  color: var(--gray-color);
+}
+div.breadcrumbs a {
+  color: var(--gray-color);
+}
+div.breadcrumbs a:hover {
+  color: var(--main-color);
+}
+#nav-sidebar .current-model {
+  background-color: var(--main-color-tint-100);
+}
+#nav-sidebar .current-model a {
+  color: var(--gray-color);
+}
+.submit-row input[type="submit"]:hover {
+  background-color: var(--main-color-shade-700);
+}
+
+a:link,
+a:visited {
+  color: var(--main-color-tint-100);
+}
