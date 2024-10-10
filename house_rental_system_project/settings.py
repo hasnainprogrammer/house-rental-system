@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'house_rental_sytem_db',
-        'USER': 'root',
-        'PASSWORD': 'hasnain56167',
+        'USER': '.........',
+        'PASSWORD': '.........',
         'HOST': 'localhost',
         'PORT': 3306,
     }
