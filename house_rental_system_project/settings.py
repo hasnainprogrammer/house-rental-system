@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-ki&_uvkxuw3sn8aa5b!__%h(48jw7lrg=11nd#8rfcyd(91lnz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']
+
 
 
 # Application definition
@@ -82,11 +83,11 @@ WSGI_APPLICATION = 'house_rental_system_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'house_rental_sytem_db',
-        'USER': '.........',
-        'PASSWORD': '.........',
-        'HOST': 'localhost',
-        'PORT': 3306,
+        'NAME': 'yourusername$yourdbname',
+        'USER': 'yourusername',
+        'PASSWORD': 'yourdbpassword',
+        'HOST': 'yourusername.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
